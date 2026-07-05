@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour de France Pool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Tour de France Pool</h1>
+    <p>Updated after Stage 2</p>
+
+    <nav class="tabs">
+      <button class="tab-button active" data-tab="home">Home</button>
+      <button class="tab-button" data-tab="rules">Rules and Scoring</button>
+      <button class="tab-button" data-tab="rider-pool">Rider Pool</button>
+    </nav>
+  </header>
+
+  <main>
+<section id="home" class="tab-content active">
+  <h2>Overall Standings</h2>
+  <div id="standings"></div>
+
+  <h2>Latest Update</h2>
+
+  <div class="card latest-update">
+    <h3>After Stage 1 + Stage 2</h3>
+    <p>
+      Luis has jumped out to an early lead behind a huge start from Jonas Vingegaard,
+      who scored stage finish points and daily yellow jersey points on both stages.
+    </p>
+
+    <div class="update-grid">
+      <div>
+        <span class="update-label">Current Leader</span>
+        <strong>Luis — 126 pts</strong>
+      </div>
+
+      <div>
+        <span class="update-label">Biggest Stage 2 Gain</span>
+        <strong>Luis — +66 pts</strong>
+      </div>
+
+      <div>
+        <span class="update-label">Stage 2 Winner</span>
+        <strong>Isaac Del Toro — Spare 3</strong>
+      </div>
+
+      <div>
+        <span class="update-label">Yellow Jersey</span>
+        <strong>Jonas Vingegaard — Luis</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Active-Team Point Breakdown</h3>
+
+    <div class="breakdown-row">
+      <strong>Luis — 126 pts</strong>
+      <span>Stage 1: 60 · Stage 2: 66</span>
+    </div>
+
+    <div class="breakdown-row">
+      <strong>Vuthy — 84 pts</strong>
+      <span>Stage 1: 44 · Stage 2: 40</span>
+    </div>
+
+    <div class="breakdown-row">
+      <strong>Tala — 60 pts</strong>
+      <span>Stage 1: 26 · Stage 2: 34</span>
+    </div>
+
+    <div class="breakdown-row">
+      <strong>CJ — 40 pts</strong>
+      <span>Stage 1: 40 · Stage 2: 0</span>
+    </div>
+
+    <div class="breakdown-row">
+      <strong>Paul — 15 pts</strong>
+      <span>Stage 1: 15 · Stage 2: 0</span>
+    </div>
+  </div>
+
+  <h2>Teams</h2>
+  <div id="teams"></div>
+
+  <h2>Latest Notes</h2>
+  <ul>
+    <li>Luis leads after two stages with 126 points.</li>
+    <li>Jonas Vingegaard has been the biggest active-team rider so far.</li>
+    <li>Vuthy is in second thanks to Tadej Pogačar scoring on both stages.</li>
+    <li>Spare 3 would be at 107 points, mostly from Isaac Del Toro’s monster Stage 2.</li>
+  </ul>
+</section>
+
+<section id="rules" class="tab-content">
+  <h2>Rules and Scoring</h2>
+
+  <div class="card">
+    <h3>How the pool works</h3>
+    <p>
+      Each team has one S Rider and five support riders. Riders earn points
+      throughout the Tour de France based on stage finishes, daily jersey holders,
+      final jersey winners, and final general classification results.
+    </p>
+    <p>
+      The goal is to keep daily racing exciting, so stage finishes are the biggest
+      recurring source of points.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Stage Finish Points</h3>
+    <p>
+      Points are awarded each stage to riders who finish in the top 10.
+    </p>
+
+    <table class="scoring-table">
+      <thead>
+        <tr>
+          <th>Place</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1st</td><td>50</td></tr>
+        <tr><td>2nd</td><td>40</td></tr>
+        <tr><td>3rd</td><td>34</td></tr>
+        <tr><td>4th</td><td>30</td></tr>
+        <tr><td>5th</td><td>26</td></tr>
+        <tr><td>6th</td><td>22</td></tr>
+        <tr><td>7th</td><td>18</td></tr>
+        <tr><td>8th</td><td>15</td></tr>
+        <tr><td>9th</td><td>12</td></tr>
+        <tr><td>10th</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Daily Jersey Points</h3>
+    <p>
+      After each stage, riders holding any of the four major jerseys earn daily
+      bonus points. All jerseys are worth the same amount.
+    </p>
+
+    <table class="scoring-table">
+      <thead>
+        <tr>
+          <th>Jersey</th>
+          <th>Daily Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Yellow Jersey</td><td>10</td></tr>
+        <tr><td>Green Jersey</td><td>10</td></tr>
+        <tr><td>Polka Dot Jersey</td><td>10</td></tr>
+        <tr><td>White Jersey</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Final Jersey Winner Points</h3>
+    <p>
+      At the end of the Tour, the final winner of each major jersey earns a bonus.
+      All final jersey bonuses are equal.
+    </p>
+
+    <table class="scoring-table">
+      <thead>
+        <tr>
+          <th>Jersey</th>
+          <th>Final Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Yellow Jersey</td><td>50</td></tr>
+        <tr><td>Green Jersey</td><td>50</td></tr>
+        <tr><td>Polka Dot Jersey</td><td>50</td></tr>
+        <tr><td>White Jersey</td><td>50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Final General Classification Points</h3>
+    <p>
+      Final GC points are meaningful but not meant to dominate the pool. This keeps
+      stage wins, breakaways, sprints, and jersey battles important throughout the race.
+    </p>
+
+    <table class="scoring-table">
+      <thead>
+        <tr>
+          <th>Final GC Place</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1st</td><td>75</td></tr>
+        <tr><td>2nd</td><td>60</td></tr>
+        <tr><td>3rd</td><td>50</td></tr>
+        <tr><td>4th</td><td>40</td></tr>
+        <tr><td>5th</td><td>30</td></tr>
+        <tr><td>6th</td><td>20</td></tr>
+        <tr><td>7th</td><td>18</td></tr>
+        <tr><td>8th</td><td>15</td></tr>
+        <tr><td>9th</td><td>12</td></tr>
+        <tr><td>10th</td><td>10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Inactive and Spare Riders</h3>
+    <p>
+      Spare riders are listed in the rider pool but do not score points unless the
+      group agrees to activate them. Abandoned or injured riders stop earning points
+      once they are no longer racing.
+    </p>
+  </div>
+</section>
+
+    <section id="rider-pool" class="tab-content">
+      <h2>Rider Pool</h2>
+      <p class="section-intro">
+        Full list of active and spare riders in the draft pool.
+      </p>
+
+      <div id="riderPool"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
