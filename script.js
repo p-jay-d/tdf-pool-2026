@@ -1,7 +1,7 @@
 const SHEET_ID = "1jNQtoagEfT8ALlde0ZBqP4MZq9qa-cvVV79NHSg_uHU";
 const BROADCAST_VIEW_GID = "56667888";
 
-const BROADCAST_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${BROADCAST_VIEW_GID}`;
+const BROADCAST_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTw83I1RbJFzUrVufiYpytCdSVfwavmwJ0UVP8z0SuUYsBe-8UhKAmfRZIFOOfD_hAjHNSGPpoIMuQO/pub?gid=1415894533&single=true&output=csv;
 
 let standings = [
   { name: "Luis", points: 126, gain: 66 },
@@ -274,30 +274,25 @@ function parseCSV(csvText) {
   return rows;
 }
 
-function rowsToObjects(rows) {
-  const headers = rows[0].map((header) => header.trim());
-
-  return rows.slice(1).map((row) => {
-    const object = {};
-
-    headers.forEach((header, index) => {
-      object[header] = row[index] ? row[index].trim() : "";
-    });
-
-    return object;
-  });
-}
-
 async function loadStandingsFromSheet() {
   try {
-    const response = await fetch(BROADCAST_CSV_URL);
+    const cacheBustedUrl = `${BROADCAST_CSV_URL}&cacheBust=${Date.now()}`;
+
+    console.log("Loading Google Sheet from:", cacheBustedUrl);
+
+    const response = await fetch(cacheBustedUrl);
 
     if (!response.ok) {
-      throw new Error("Could not load Google Sheet data.");
+      throw new Error(`Could not load Google Sheet data. Status: ${response.status}`);
     }
 
     const csvText = await response.text();
+
+    console.log("Raw CSV received:", csvText.slice(0, 500));
+
     const rows = parseCSV(csvText);
+
+    console.log("Parsed rows:", rows);
 
     const activeStandingsIndex = rows.findIndex((row) =>
       row.some((cell) => cell.trim() === "Active Standings")
@@ -307,23 +302,34 @@ async function loadStandingsFromSheet() {
       throw new Error("Could not find Active Standings section.");
     }
 
-    const headerIndex = activeStandingsIndex + 1;
-    const dataStartIndex = headerIndex + 1;
+    const headerIndex = rows.findIndex((row, index) =>
+      index > activeStandingsIndex &&
+      row[0] &&
+      row[0].trim() === "Rank" &&
+      row[1] &&
+      row[1].trim() === "Team" &&
+      row[2] &&
+      row[2].trim() === "Points"
+    );
+
+    if (headerIndex === -1) {
+      throw new Error("Could not find Active Standings header row.");
+    }
 
     const activeStandingsRows = [];
 
-    for (let i = dataStartIndex; i < rows.length; i++) {
+    for (let i = headerIndex + 1; i < rows.length; i++) {
       const row = rows[i];
 
       const firstCell = row[0] ? row[0].trim() : "";
       const team = row[1] ? row[1].trim() : "";
       const points = row[2] ? row[2].trim() : "";
 
-      if (!firstCell && !team && !points) {
+      if (firstCell === "Hidden Spare Standings") {
         break;
       }
 
-      if (firstCell === "Hidden Spare Standings") {
+      if (!firstCell && !team && !points) {
         break;
       }
 
@@ -331,18 +337,22 @@ async function loadStandingsFromSheet() {
         activeStandingsRows.push({
           rank: Number(firstCell) || activeStandingsRows.length + 1,
           name: team,
-          points: Number(points) || 0,
+          points: Number(points.replace(/,/g, "")) || 0,
           sRider: row[3] ? row[3].trim() : "",
           topScoringRider: row[4] ? row[4].trim() : "",
-          topRiderPoints: Number(row[5]) || 0,
+          topRiderPoints: row[5] ? Number(row[5].replace(/,/g, "")) || 0 : 0,
           gain: 0
         });
       }
     }
 
+    console.log("Active standings loaded:", activeStandingsRows);
+
     if (activeStandingsRows.length > 0) {
       standings = activeStandingsRows;
       renderStandings();
+    } else {
+      throw new Error("Active Standings section was found, but no team rows were loaded.");
     }
   } catch (error) {
     console.error("Google Sheet loading failed:", error);
