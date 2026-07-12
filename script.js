@@ -280,7 +280,6 @@ async function loadStandingsFromSheet() {
 
     console.log("Loading Google Sheet from:", cacheBustedUrl);
 
-    const cacheBustedUrl = `${BROADCAST_CSV_URL}&cacheBust=${Date.now()}`;
     const response = await fetch(cacheBustedUrl);
 
     if (!response.ok) {
