@@ -112,7 +112,7 @@ const teams = [
     owner: "Spare 4",
     status: "Spare",
     riders: [
-      { name: "Paul Seixas", role: "S Rider", summary: "Young French climbing prospect and emerging stage-race rider." },
+     { name: "Paul Seixas", role: "S Rider", summary: "Young French climbing prospect and emerging stage-race rider." },
       { name: "Tom Pidcock", role: "Support Rider 1", summary: "British multi-discipline star, punchy climber, and stage hunter." },
       { name: "Michael Storer", role: "Support Rider 2", summary: "Australian climber suited to mountain stages and breakaways." },
       { name: "Jai Hindley", role: "Support Rider 3", summary: "Australian Grand Tour winner and strong climbing GC rider." },
