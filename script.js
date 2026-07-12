@@ -1,7 +1,7 @@
 const SHEET_ID = "1jNQtoagEfT8ALlde0ZBqP4MZq9qa-cvVV79NHSg_uHU";
 const BROADCAST_VIEW_GID = "56667888";
 
-const BROADCAST_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTw83I1RbJFzUrVufiYpytCdSVfwavmwJ0UVP8z0SuUYsBe-8UhKAmfRZIFOOfD_hAjHNSGPpoIMuQO/pub?gid=1415894533&single=true&output=csv;
+const BROADCAST_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw831lRbJFzUrVufiYpytCdSVfwavmwJOUVP8zOSuUYsBe-8UhKAmfRZlFOOfD_hAjHNSGPpolMuQO/pub?gid=1415894533&single=true&output=csv";
 
 let standings = [
   { name: "Luis", points: 126, gain: 66 },
@@ -280,6 +280,7 @@ async function loadStandingsFromSheet() {
 
     console.log("Loading Google Sheet from:", cacheBustedUrl);
 
+    const cacheBustedUrl = `${BROADCAST_CSV_URL}&cacheBust=${Date.now()}`;
     const response = await fetch(cacheBustedUrl);
 
     if (!response.ok) {
